@@ -10,10 +10,12 @@ import {
   Poppins_500Medium
 } from '@expo-google-fonts/poppins';
 import AppLoading from 'expo-app-loading';
+import { LogBox } from "react-native";
 
 const Tab = createBottomTabNavigator();
 const Stack = createNativeStackNavigator();
 
+LogBox.ignoreAllLogs();
 
 const TabList = () => {
   return(
