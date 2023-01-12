@@ -5,6 +5,11 @@ import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import Ionicons from 'react-native-vector-icons/Ionicons'
 import { NativeBaseProvider, StatusBar, extendTheme } from "native-base"; 
+import {
+  useFonts,
+  Poppins_500Medium
+} from '@expo-google-fonts/poppins';
+import AppLoading from 'expo-app-loading';
 
 const Tab = createBottomTabNavigator();
 const Stack = createNativeStackNavigator();
@@ -61,18 +66,40 @@ const TabList = () => {
 }
 
 const App = () =>{
-  return(
+  const [fontsLoaded] = useFonts({
+      Poppins_500Medium,
+  });
+  return fontsLoaded ? (
     <NativeBaseProvider >
       <StatusBar/>
       <NavigationContainer>
-        <Stack.Navigator screenOptions={{headerShown:false}}>
-          <Stack.Screen name={"Landing"} component={Landing}/>
-          <Stack.Screen name={"Login"} component={Login} options={{headerShown:true}}/>
+        <Stack.Navigator screenOptions={{
+          headerStyle: {
+            backgroundColor: '#3B939B',
+            // elevation: 0,
+            // shadowOpacity: 0,
+          },
+          headerTintColor: '#ffffff',
+          // headerTitleStyle: {
+          //   fontWeight: 'bold',
+          // },
+          headerTitleAlign: 'center',
+          headerShadowVisible: false,
+          headerTitleStyle:{
+            fontSize: 18,
+            // fontWeight: "",
+            fontFamily: "Poppins_500Medium"
+          }
+        }}>
+          <Stack.Screen name={"Landing"} component={Landing} options={{headerShown: false}}/>
+          <Stack.Screen name={"Login"} component={Login} options={{title:"Sign in"}}/>
           <Stack.Screen name={"Register"} component={Register}/>
           <Stack.Screen name={"HomeStack"} component={TabList}/>
         </Stack.Navigator>
       </NavigationContainer>
     </NativeBaseProvider>
+  ) : (
+    <AppLoading/>
   )
 }
 

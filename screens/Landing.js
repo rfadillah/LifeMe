@@ -29,7 +29,7 @@ const Landing = ({navigation}) => {
     return fontsLoaded ? (
         <Box flex={1} backgroundColor="#3B939B">
             <Box flex={5} backgroundColor="#FFFFFF">
-                <Box flex={1} backgroundColor="#3B939B" borderBottomRightRadius="100px">
+                <Box flex={1} backgroundColor="#3B939B" borderBottomRightRadius="90px">
                     <Center>
                         <Image
                             source={require('../assets/landing_pic.png')}
@@ -41,7 +41,7 @@ const Landing = ({navigation}) => {
                     </Center>  
                 </Box>
             </Box>
-            <Box flex={7} backgroundColor="#FFFFFF" borderTopLeftRadius="100px">
+            <Box flex={7} backgroundColor="#FFFFFF" borderTopLeftRadius="90px">
                 <Center>
                     <Text fontFamily="Poppins_700Bold" fontSize="40px" mt="45px" color="#2F8189">Hello!</Text>
                     <Box maxW="72%">
