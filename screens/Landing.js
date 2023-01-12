@@ -64,7 +64,6 @@ const Landing = ({navigation}) => {
                     <Pressable onPress={() => Alert.alert("Sorry, this feature is unavailable")}>
                         <Image source={require("../assets/sosmed.png")} alt="sosmed" mt="5%" W="60%" resizeMode="contain"/>
                     </Pressable>
-                    
                 </Center>
             </Box>
         </Box>
