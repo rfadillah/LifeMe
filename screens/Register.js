@@ -1,6 +1,6 @@
 import { Box, Text, Image, VStack, Center, Pressable } from 'native-base'
 import { Alert } from 'react-native';
-import React from 'react'
+import React, { useState } from 'react'
 import {
   useFonts,
   Poppins_700Bold,
@@ -9,14 +9,35 @@ import {
 } from '@expo-google-fonts/poppins';
 import AppLoading from 'expo-app-loading';
 import { BtnPrimary, Separator, TextInput } from "../component"
-// import { TouchableOpacity } from 'react-native';
+import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword } from "firebase/auth"
+import { app } from '../firebase';
 
 const Register = ({navigation}) => {
+
+  const [email, setEmail] = useState("")
+  const [password, setPassword] = useState("")
+
+  const auth = getAuth(app)
+
+  const handleRegister = () => {
+      createUserWithEmailAndPassword(auth, email, password)
+      .then(() => {
+        console.log("Account created")
+        const user = userCredential.user;
+        console.log(user)
+        navigation.navigate("Login")
+      })
+      .catch(error => {
+        console.log(error)
+      })
+  }
+
   const [fontsLoaded] = useFonts({
       Poppins_700Bold,
       Poppins_500Medium,
       Poppins_400Regular
   });
+
   return fontsLoaded ? (
     <Box flex={1} backgroundColor="#3B939B" >
       <Box flex={5}>
@@ -27,14 +48,14 @@ const Register = ({navigation}) => {
           <Text fontFamily={"Poppins_400Regular"} fontSize="16px" color={"#FFFFFF"} opacity="0.6">Buatlah akunmu untuk melanjutkan</Text>
           <Separator height={"4%"}/>
           <VStack space={4}>
-            <TextInput placeholder={"Masukkan email"} label={"Email"}/>
-            <TextInput placeholder={"Masukkan password"} label={"Password"}/>
+            <TextInput placeholder={"Masukkan email"} label={"Email"} oct={text => setEmail(text)} value={email}/>
+            <TextInput placeholder={"Masukkan password"} label={"Password"} oct={text => setPassword(text)} value={password}/>
             <TextInput placeholder={"Masukkan password"} label={"Konfirmasi Password"}/>
           </VStack>
           <Separator height={"5%"}/>
         </Box>
         <Center>
-          <BtnPrimary text={"Sign up"} bgc={"#FFFFFF"} tc={"#2F8189"} o={1} onPress={()=> navigation.navigate("HomeStack")}/>
+          <BtnPrimary text={"Sign up"} bgc={"#FFFFFF"} tc={"#2F8189"} o={1} onPress={handleRegister}/>
           <Separator height={"9%"}/>
           <Box flexDir={"row"}>
             <Text fontFamily={"Poppins_400Regular"} fontSize="14px" color={"#FFFFFF"} opacity="0.6" pr={"5px"}>Sudah mendaftar?</Text>

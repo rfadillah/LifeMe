@@ -1,6 +1,6 @@
 import { Box, Text, Image, VStack, Center, Pressable } from 'native-base'
 import { Alert } from 'react-native';
-import React from 'react'
+import React, { useState } from 'react'
 import {
   useFonts,
   Poppins_700Bold,
@@ -9,9 +9,14 @@ import {
 } from '@expo-google-fonts/poppins';
 import AppLoading from 'expo-app-loading';
 import { BtnPrimary, Separator, TextInput } from "../component"
-// import { TouchableOpacity } from 'react-native';
+
+
 
 const Login = ({navigation}) => {
+
+  const [email, setEmail] = useState("")
+  const [password, setPassword] = useState("")
+
   const [fontsLoaded] = useFonts({
       Poppins_700Bold,
       Poppins_500Medium,
@@ -27,8 +32,8 @@ const Login = ({navigation}) => {
           <Text fontFamily={"Poppins_400Regular"} fontSize="16px" color={"#FFFFFF"} opacity="0.6">Sign in untuk melanjutkan</Text>
           <Separator height={"7%"}/>
           <VStack space={4}>
-            <TextInput placeholder={"Masukkan email"} label={"Email"}/>
-            <TextInput placeholder={"Masukkan password"} label={"Password"}/>
+            <TextInput placeholder={"Masukkan email"} label={"Email"} oct={text => setEmail(text)} value={email}/>
+            <TextInput placeholder={"Masukkan password"} label={"Password"} oct={text => setPassword(text)} value={password}/>
             <Box maxW={"88%"}>
               <Box alignItems={"flex-end"}>
                 <Pressable onPress={() => Alert.alert("Sorry, this feature is unavailable")}>

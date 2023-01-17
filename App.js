@@ -95,7 +95,7 @@ const App = () =>{
         }}>
           <Stack.Screen name={"Landing"} component={Landing} options={{headerShown: false}}/>
           <Stack.Screen name={"Login"} component={Login} options={{title:"Sign in"}}/>
-          <Stack.Screen name={"Register"} component={Register}/>
+          <Stack.Screen name={"Register"} component={Register} options={{title:"Sign up"}}/>
           <Stack.Screen name={"HomeStack"} component={TabList}/>
         </Stack.Navigator>
       </NavigationContainer>
