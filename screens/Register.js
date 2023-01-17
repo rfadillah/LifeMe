@@ -25,11 +25,11 @@ const Register = ({navigation}) => {
         console.log("Account created")
         const user = userCredential.user;
         console.log(user)
-        navigation.navigate("Login")
       })
       .catch(error => {
         console.log(error)
       })
+      .finally(() => navigation.navigate("Login"))
   }
 
   const [fontsLoaded] = useFonts({
