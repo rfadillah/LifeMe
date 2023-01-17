@@ -9,27 +9,38 @@ import {
 } from '@expo-google-fonts/poppins';
 import AppLoading from 'expo-app-loading';
 import { BtnPrimary, Separator, TextInput } from "../component"
-import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword } from "firebase/auth"
+import { getAuth, createUserWithEmailAndPassword } from "firebase/auth"
 import { app } from '../firebase';
 
 const Register = ({navigation}) => {
 
   const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
+  const [password2, setPassword2] = useState("")
 
   const auth = getAuth(app)
 
   const handleRegister = () => {
+    if ( email=="" || password=="" || password2==""){
+      Alert.alert("isi email & password")
+      return;
+    } else if (password != password2) {
+      Alert.alert("password tidak sama")
+      return;
+    }
       createUserWithEmailAndPassword(auth, email, password)
-      .then(() => {
+      .then((userCredential) => {
         console.log("Account created")
         const user = userCredential.user;
         console.log(user)
+        navigation.navigate("Login")
+        Alert.alert("Success sign up!")
       })
       .catch(error => {
+        Alert.alert(error.message)
         console.log(error)
+        return;
       })
-      .finally(() => navigation.navigate("Login"))
   }
 
   const [fontsLoaded] = useFonts({
@@ -50,7 +61,7 @@ const Register = ({navigation}) => {
           <VStack space={4}>
             <TextInput placeholder={"Masukkan email"} label={"Email"} oct={text => setEmail(text)} value={email}/>
             <TextInput placeholder={"Masukkan password"} label={"Password"} oct={text => setPassword(text)} value={password}/>
-            <TextInput placeholder={"Masukkan password"} label={"Konfirmasi Password"}/>
+            <TextInput placeholder={"Masukkan password"} label={"Konfirmasi Password"} oct={text => setPassword2(text)} value={password2}/>
           </VStack>
           <Separator height={"5%"}/>
         </Box>

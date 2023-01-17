@@ -9,13 +9,35 @@ import {
 } from '@expo-google-fonts/poppins';
 import AppLoading from 'expo-app-loading';
 import { BtnPrimary, Separator, TextInput } from "../component"
-
+import { getAuth, signInWithEmailAndPassword } from "firebase/auth"
+import { app } from '../firebase';
 
 
 const Login = ({navigation}) => {
 
   const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
+
+  const auth = getAuth(app)
+
+  const handleLogin = () => {
+    if ( email=="" || password=="" ){
+      Alert.alert("isi email & password")
+      return;
+    }
+    signInWithEmailAndPassword(auth, email, password)
+    .then((userCredential) => {
+      console.log("login")
+      const user = userCredential.user;
+      console.log(user)
+      navigation.navigate("HomeStack")
+    })
+    .catch(error => {
+        Alert.alert(error.code)
+        console.log(error)
+        return
+      })
+  }
 
   const [fontsLoaded] = useFonts({
       Poppins_700Bold,
@@ -45,7 +67,7 @@ const Login = ({navigation}) => {
           <Separator height={"2%"}/>
         </Box>
         <Center>
-          <BtnPrimary text={"Sign in"} bgc={"#FFFFFF"} tc={"#2F8189"} o={1} onPress={()=> navigation.navigate("HomeStack")}/>
+          <BtnPrimary text={"Sign in"} bgc={"#FFFFFF"} tc={"#2F8189"} o={1} onPress={handleLogin}/>
           <Separator height={"9%"}/>
           <Box flexDir={"row"}>
             <Text fontFamily={"Poppins_400Regular"} fontSize="14px" color={"#FFFFFF"} opacity="0.6" pr={"5px"}>Belum mendaftar?</Text>
