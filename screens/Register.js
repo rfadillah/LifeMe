@@ -8,7 +8,7 @@ import {
   Poppins_400Regular
 } from '@expo-google-fonts/poppins';
 import AppLoading from 'expo-app-loading';
-import { BtnPrimary, Separator, TextInput } from "../component"
+import { BtnPrimary, Separator, TextInput, PwdInput } from "../component"
 import { getAuth, createUserWithEmailAndPassword } from "firebase/auth"
 import { app } from '../firebase';
 
@@ -60,8 +60,8 @@ const Register = ({navigation}) => {
           <Separator height={"4%"}/>
           <VStack space={4}>
             <TextInput placeholder={"Masukkan email"} label={"Email"} oct={text => setEmail(text)} value={email}/>
-            <TextInput placeholder={"Masukkan password"} label={"Password"} oct={text => setPassword(text)} value={password}/>
-            <TextInput placeholder={"Masukkan password"} label={"Konfirmasi Password"} oct={text => setPassword2(text)} value={password2}/>
+            <PwdInput placeholder={"Masukkan password"} label={"Password"} oct={text => setPassword(text)} value={password}/>
+            <PwdInput placeholder={"Masukkan password"} label={"Konfirmasi Password"} oct={text => setPassword2(text)} value={password2}/>
           </VStack>
           <Separator height={"5%"}/>
         </Box>
