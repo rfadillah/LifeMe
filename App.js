@@ -3,8 +3,8 @@ import { Login, Register, Home, Jurnal, Finance, Other, Account, Landing } from 
 import { NavigationContainer } from "@react-navigation/native"; 
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
+import { NativeBaseProvider, StatusBar } from "native-base"; 
 import Ionicons from 'react-native-vector-icons/Ionicons'
-import { NativeBaseProvider, StatusBar, extendTheme } from "native-base"; 
 import {
   useFonts,
   Poppins_500Medium
@@ -20,22 +20,22 @@ LogBox.ignoreAllLogs();
 const TabList = () => {
   return(
     <Tab.Navigator 
-      initialRouteName={Home}
+      initialRouteName={"Home"}
       screenOptions = {({route}) => ({
         tabBarIcon: ({focused, color, size}) => {
           let iconName;
           let rn = route.name;
 
-          if(rn == Home){
+          if(rn == "Home"){
             iconName = focused ?  'home' : 'home-outline'
-          }else if (rn == Jurnal){
+          }else if (rn == "Jurnal"){
             iconName = focused ?  'book' : 'book-outline'
-          }else if (rn == Finance){
+          }else if (rn == "Finance"){
             iconName = focused ?  'wallet' : 'wallet-outline'
-          }else if (rn == Other){
+          }else if (rn == "Other"){
             iconName = focused ?  'list' : 'list-outline'
-          }else if (rn == Account){
-            iconName = focused ?  'accessibility' : 'accessibility-outline'
+          }else if (rn == "Account"){
+            iconName = focused ?  'person' : 'person-outline'
           }
           
           
@@ -45,23 +45,19 @@ const TabList = () => {
         tabBarStyle:{
           height:70, 
           padding:10, 
-          // position:'absolute', 
-          // bottom:15, left:20, 
-          // right:20, elevation:0, 
-          // borderRadius:35,
-          backgroundColor:'#594545'
+          backgroundColor:'#ffffff'
         }, 
       })}
       tabBarOptions = {{
-        activeTintColor:'#FFFFFF',
-        inactiveTintColor:'#cc9999',
+        activeTintColor:'#3B939B',
+        inactiveTintColor:'#6AC3CB',
         labelStyle:{paddingBottom:10, fontSize:13, fontWeight:'reguler'},
       }}
     >
       <Tab.Screen name={'Home'} component={Home} options={{ headerTitleAlign: 'center'}}/>
       <Tab.Screen name={'Jurnal'} component={Jurnal} options={{ headerTitleAlign: 'center'}}/>
       <Tab.Screen name={'Finance'} component={Finance} options={{ headerTitleAlign: 'center'}}/>
-      <Tab.Screen name={'Other'} component={Other} options={{ headerTitleAlign: 'center'}}/>
+      {/* <Tab.Screen name={'Other'} component={Other} options={{ headerTitleAlign: 'center'}}/> */}
       <Tab.Screen name={'Account'} component={Account} options={{ headerTitleAlign: 'center'}}/>
     </Tab.Navigator>
   )
@@ -96,7 +92,7 @@ const App = () =>{
           <Stack.Screen name={"Landing"} component={Landing} options={{headerShown: false}}/>
           <Stack.Screen name={"Login"} component={Login} options={{title:"Sign in"}}/>
           <Stack.Screen name={"Register"} component={Register} options={{title:"Sign up"}}/>
-          <Stack.Screen name={"HomeStack"} component={TabList}/>
+          <Stack.Screen name={"HomeStack"} component={TabList} options={{headerShown: false}}/>
         </Stack.Navigator>
       </NavigationContainer>
     </NativeBaseProvider>

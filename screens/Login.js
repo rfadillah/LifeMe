@@ -31,6 +31,10 @@ const Login = ({navigation}) => {
       const user = userCredential.user;
       console.log(user)
       navigation.navigate("HomeStack")
+      navigation.reset({
+        index: 0,
+        routes: [{ name: "HomeStack" }],
+      })
     })
     .catch(error => {
         Alert.alert(error.code)
