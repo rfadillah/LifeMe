@@ -1,4 +1,4 @@
-import { Box, Text, Image, VStack, Center, Pressable } from 'native-base'
+import { Box, Text, Image, VStack, Center, Pressable, ScrollView } from 'native-base'
 import { Alert } from 'react-native';
 import React, { useState } from 'react'
 import {
