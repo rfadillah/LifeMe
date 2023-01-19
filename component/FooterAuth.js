@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { Box, Image, Pressable } from 'native-base'
+import { Alert } from "react-native"
 
 export class FooterAuth extends Component {
   render() {

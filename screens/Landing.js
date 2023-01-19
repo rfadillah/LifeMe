@@ -10,17 +10,6 @@ import AppLoading from 'expo-app-loading';
 import { BtnPrimary, Separator } from "../component"
 
 
-// export const theme = extendTheme({
-//   components: {
-//     Heading: {
-//       baseStyle: {
-//         fontWeight: '400',
-//       },
-//     },
-//   },
-// //   config,
-// });
-
 const Landing = ({navigation}) => {
     const [fontsLoaded] = useFonts({
         Poppins_700Bold,
@@ -45,7 +34,7 @@ const Landing = ({navigation}) => {
                 <Center>
                     <Text fontFamily="Poppins_700Bold" fontSize="40px" mt="45px" color="#2F8189">Hello!</Text>
                     <Box maxW="72%">
-                        <Text textAlign="center" fontFamily="Poppins_500Medium" fontSize="14px" color="#A1A1A1">Welcome to Kost Lyfe Apps A Platform To Help your day in being nomads.</Text> 
+                        <Text textAlign="center" fontFamily="Poppins_500Medium" fontSize="14px" color="#A1A1A1">Welcome to Life Me app. A platform to help you being a better person ❤️</Text> 
                     </Box> 
                     <Separator height={30}/>
                     <BtnPrimary text={"Sign in"} bgc={"#2F8189"} tc={"#FFFFFF"} o={1} onPress={()=> navigation.navigate("Login")}/>

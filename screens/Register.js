@@ -1,5 +1,4 @@
 import { Box, Text, Image, VStack, Center, Pressable } from 'native-base'
-import { KeyboardAvoidingView } from "react-native"
 import { Alert } from 'react-native';
 import React, { useState } from 'react'
 import {
@@ -54,7 +53,7 @@ const Register = ({navigation}) => {
     <Box flex={1} backgroundColor="#3B939B" >
       <Box flex={5}>
         <Box pl="6%">
-          <Image source={require("../assets/logo_vertical.png")} alt="logo" w="42%" mt="2%" ml="-4%" resizeMode='contain'/>
+          <Image source={require("../assets/logo-lifeme-invert.png")} alt="logo" w="42%" mt="2%" h="15%" resizeMode='contain' ml="-2%"/>
           <Separator height={"1%"}/>
           <Text fontFamily={"Poppins_500Medium"} fontSize="36px" color="white">Halo!</Text>
           <Text fontFamily={"Poppins_400Regular"} fontSize="16px" color={"#FFFFFF"} opacity="0.6">Buatlah akunmu untuk melanjutkan</Text>
@@ -64,12 +63,12 @@ const Register = ({navigation}) => {
             <PwdInput placeholder={"Masukkan password"} label={"Password"} oct={text => setPassword(text)} value={password}/>
             <PwdInput placeholder={"Masukkan password"} label={"Konfirmasi Password"} oct={text => setPassword2(text)} value={password2}/>
           </VStack>
-          <Separator height={"5%"}/>
+          <Separator height={"3%"}/>
         </Box>
         <Center>
           <BtnPrimary text={"Sign up"} bgc={"#FFFFFF"} tc={"#2F8189"} o={1} onPress={handleRegister}/>
-          <Separator height={"9%"}/>
-          <Box flexDir={"row"}>
+          {/* <Separator height={"3%"}/> */}
+          <Box flexDir={"row"} mt="10px">
             <Text fontFamily={"Poppins_400Regular"} fontSize="14px" color={"#FFFFFF"} opacity="0.6" pr={"5px"}>Sudah mendaftar?</Text>
             <Pressable onPress={()=> navigation.navigate("Login")}>
               <Text fontFamily={"Poppins_400Regular"} fontSize="14px" color={"#FFFFFF"} opacity="0.6" pr={"5px"} textDecorationLine="underline">Sign in</Text>

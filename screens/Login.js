@@ -1,5 +1,5 @@
-import { Box, Text, Image, VStack, Center, Pressable, ScrollView } from 'native-base'
-import { Alert } from 'react-native';
+import { Box, Text, Image, VStack, Center, Pressable } from 'native-base'
+import { Alert } from "react-native"
 import React, { useState } from 'react'
 import {
   useFonts,
@@ -52,8 +52,8 @@ const Login = ({navigation}) => {
     <Box flex={1} backgroundColor="#3B939B" >
       <Box flex={5}>
         <Box pl="6%">
-          <Image source={require("../assets/logo_vertical.png")} alt="logo" w="42%" mt="2%" ml="-4%" resizeMode='contain'/>
-          <Separator height={"4%"}/>
+          <Image source={require("../assets/logo-lifeme-invert.png")} alt="logo" w="42%" mt="2%" h="20%" resizeMode='contain' ml="1%"/>
+          <Separator height={"3%"}/>
           <Text fontFamily={"Poppins_500Medium"} fontSize="36px" color="white">Selamat Datang!</Text>
           <Text fontFamily={"Poppins_400Regular"} fontSize="16px" color={"#FFFFFF"} opacity="0.6">Sign in untuk melanjutkan</Text>
           <Separator height={"7%"}/>
@@ -69,12 +69,11 @@ const Login = ({navigation}) => {
               </Box>
             </Box>
           </VStack>
-          <Separator height={"2%"}/>
         </Box>
         <Center>
           <BtnPrimary text={"Sign in"} bgc={"#FFFFFF"} tc={"#2F8189"} o={1} onPress={handleLogin}/>
-          <Separator height={"9%"}/>
-          <Box flexDir={"row"}>
+          {/* <Separator height={"1%"}/> */}
+          <Box flexDir={"row"} mt="10px">
             <Text fontFamily={"Poppins_400Regular"} fontSize="14px" color={"#FFFFFF"} opacity="0.6" pr={"5px"}>Belum mendaftar?</Text>
             <Pressable onPress={()=> navigation.navigate("Register")}>
               <Text fontFamily={"Poppins_400Regular"} fontSize="14px" color={"#FFFFFF"} opacity="0.6" pr={"5px"} textDecorationLine="underline">Sign up</Text>
