@@ -25,7 +25,7 @@ export class Home extends Component {
       labels: ["January", "February", "March", "April", "May", "June"],
       datasets: [
         {
-          data: [95, 45, 28, 80, 99, 43]
+          data: [95, 45, 28, 78, 99, 43]
         }
       ]
     };
