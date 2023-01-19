@@ -8,7 +8,7 @@ import {
   Poppins_400Regular
 } from '@expo-google-fonts/poppins';
 import AppLoading from 'expo-app-loading';
-import { BtnPrimary, Separator, TextInput, PwdInput } from "../component"
+import { BtnPrimary, Separator, TextInput, PwdInput, FooterAuth } from "../component"
 import { getAuth, createUserWithEmailAndPassword } from "firebase/auth"
 import { app } from '../firebase';
 
@@ -77,12 +77,7 @@ const Register = ({navigation}) => {
         </Center>
       </Box>
       <Box flex={1}>
-        <Image source={require("../assets/footer.png")} alt="footer" resizeMode='contain' position={"absolute"}/>
-        <Box flex={1} justifyContent="center" alignItems={"center"}>
-          <Pressable onPress={() => Alert.alert("Sorry, this feature is unavailable")}>
-            <Image source={require("../assets/sosmed.png")} alt="sosmed"  W="60%" resizeMode="contain" zIndex={1}/>
-          </Pressable>
-        </Box>
+        <FooterAuth/>
       </Box>
     </Box>
   ) : (
