@@ -59,7 +59,6 @@ const Login = ({navigation}) => {
           <Separator height={"7%"}/>
           <VStack space={4}>
             <TextInput placeholder={"Masukkan email"} label={"Email"} oct={text => setEmail(text)} value={email}/>
-            {/* <TextInput placeholder={"Masukkan password"} label={"Password"} oct={text => setPassword(text)} value={password}/> */}
             <PwdInput placeholder={"Masukkan password"} label={"Password"} oct={text => setPassword(text)} value={password}/>
             <Box maxW={"88%"}>
               <Box alignItems={"flex-end"}>

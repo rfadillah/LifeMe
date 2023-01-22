@@ -45,16 +45,16 @@ const TabList = () => {
         tabBarStyle:{
           height:70, 
           padding:10, 
-          backgroundColor:'#ffffff'
+          backgroundColor:'#6AC3CB'
         }, 
       })}
       tabBarOptions = {{
-        activeTintColor:'#3B939B',
-        inactiveTintColor:'#6AC3CB',
+        activeTintColor:'#000000',
+        inactiveTintColor:'#466F73',
         labelStyle:{paddingBottom:10, fontSize:13, fontWeight:'reguler'},
       }}
     >
-      <Tab.Screen name={'Home'} component={Home} options={{ headerTitleAlign: 'center'}}/>
+      <Tab.Screen name={'Home'} component={Home} options={{ headerTitleAlign: 'center', headerShown: false}}/>
       <Tab.Screen name={'Jurnal'} component={Jurnal} options={{ headerTitleAlign: 'center'}}/>
       <Tab.Screen name={'Finance'} component={Finance} options={{ headerTitleAlign: 'center'}}/>
       {/* <Tab.Screen name={'Other'} component={Other} options={{ headerTitleAlign: 'center'}}/> */}
