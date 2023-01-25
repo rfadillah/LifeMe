@@ -22,6 +22,7 @@ const TabList = () => {
     <Tab.Navigator 
       initialRouteName={"Home"}
       screenOptions = {({route}) => ({
+        headerShown : false,
         tabBarIcon: ({focused, color, size}) => {
           let iconName;
           let rn = route.name;
@@ -89,7 +90,7 @@ const App = () =>{
             fontFamily: "Poppins_500Medium"
           }
         }}>
-          <Stack.Screen name={"Landing"} component={Landing} options={{headerShown: false}}/>
+          <Stack.Screen name={"Landing"} component={Landing} />
           <Stack.Screen name={"Login"} component={Login} options={{title:"Sign in"}}/>
           <Stack.Screen name={"Register"} component={Register} options={{title:"Sign up"}}/>
           <Stack.Screen name={"HomeStack"} component={TabList} options={{headerShown: false}}/>

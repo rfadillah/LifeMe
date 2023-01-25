@@ -15,5 +15,5 @@ export {
     Finance,
     Other,
     Account,
-    Landing
+    Landing,
 }
