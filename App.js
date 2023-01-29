@@ -1,5 +1,5 @@
 import React from "react";
-import { Login, Register, Home, Jurnal, Finance, Other, Account, Landing } from "./screens";
+import { Login, Register, Home, Jurnal, Finance, Other, Account, Landing, AddFinance, AddCost } from "./screens";
 import { NavigationContainer } from "@react-navigation/native"; 
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
@@ -94,6 +94,8 @@ const App = () =>{
           <Stack.Screen name={"Login"} component={Login} options={{title:"Sign in"}}/>
           <Stack.Screen name={"Register"} component={Register} options={{title:"Sign up"}}/>
           <Stack.Screen name={"HomeStack"} component={TabList} options={{headerShown: false}}/>
+          <Stack.Screen name={"AddFinance"} component={AddFinance} options={{title:"Tambah pemasukan", headerStyle:{backgroundColor:"#ffffff"}, headerTintColor:"#2F8189"}}/>
+          <Stack.Screen name={"AddCost"} component={AddCost} options={{title:"Tambah pengeluaran", headerStyle:{backgroundColor:"#ffffff"}, headerTintColor:"#2F8189"}}/>
         </Stack.Navigator>
       </NavigationContainer>
     </NativeBaseProvider>

@@ -1,4 +1,4 @@
-import { Box, Text, Image, HStack, VStack, ScrollView, Select, CheckIcon, Center } from 'native-base'
+import { Box, Text, Image, HStack, VStack, ScrollView, Select, CheckIcon, Center, Pressable } from 'native-base'
 import React from 'react'
 import Ionicons from 'react-native-vector-icons/Ionicons'
 import { getAuth } from "firebase/auth"
@@ -14,7 +14,7 @@ import AppLoading from 'expo-app-loading';
 import { Separator } from '../component';
 import { PieChart } from 'react-native-chart-kit'
 
-const Finance = () => {
+const Finance = ({navigation}) => {
 
   const data = [
     {
@@ -74,7 +74,14 @@ const Finance = () => {
                 <Text fontFamily={"Poppins_700Bold"} color="white" fontSize={"22px"}>Rp. 1.000.000</Text>
                 <Text fontFamily={"Poppins_400Regular"} color="white" fontSize={"13px"}>Saldo anda</Text>
               </VStack>
-              <Ionicons name='add-circle' size={35} color="white"></Ionicons>
+              <HStack>
+                <Pressable onPress={() => navigation.navigate("AddFinance")} mr={"7px"}>
+                  <Ionicons name='add-circle' size={35} color="white"></Ionicons>
+                </Pressable>
+                <Pressable onPress={() => navigation.navigate("AddCost")}>
+                  <Ionicons name='remove-circle' size={35} color="white"></Ionicons>
+                </Pressable>
+              </HStack>
             </HStack>
           </Box>
         </Box>
