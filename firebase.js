@@ -1,16 +1,16 @@
-import { initializeApp } from "firebase/app"
+import { initializeApp } from "firebase/app";
+import { getFirestore } from "firebase/firestore";
 
 const firebaseConfig = {
-  apiKey: "AIzaSyD-fawIZP_t3jGqs3lwaP9o1bfQRL2Qx9I",
-  authDomain: "lifeme-ddc0f.firebaseapp.com",
-  projectId: "lifeme-ddc0f",
-  storageBucket: "lifeme-ddc0f.appspot.com",
-  messagingSenderId: "535107846803",
-  appId: "1:535107846803:web:4c6808cf1a6995018cc366"
+  apiKey: "AIzaSyCE0Q0xLkoFnnIsTOQsNPkg8LZ_yJn4iHI",
+  authDomain: "lifeme2-846f5.firebaseapp.com",
+  projectId: "lifeme2-846f5",
+  storageBucket: "lifeme2-846f5.appspot.com",
+  messagingSenderId: "24887961425",
+  appId: "1:24887961425:web:5e02b3279f5abfab395570",
 };
 
-const app = initializeApp(firebaseConfig)
+const app = initializeApp(firebaseConfig);
+const db = getFirestore(app);
 
-export {app}
-
-
+export { app, db };

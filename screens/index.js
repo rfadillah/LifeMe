@@ -8,16 +8,20 @@ import Account from "./Account";
 import Landing from "./Landing";
 import AddFinance from "./AddFinance";
 import AddCost from "./AddCost";
+import Psikolog from "./Psikolog";
+import History from "./History";
 
 export {
-    Login,
-    Register,
-    Home,
-    Jurnal,
-    Finance,
-    Other,
-    Account,
-    Landing,
-    AddFinance,
-    AddCost
-}
+  Login,
+  Register,
+  Home,
+  Jurnal,
+  Finance,
+  Other,
+  Account,
+  Landing,
+  AddFinance,
+  AddCost,
+  Psikolog,
+  History,
+};

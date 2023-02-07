@@ -10,7 +10,8 @@ import {
 import AppLoading from 'expo-app-loading';
 import { BtnPrimary, Separator, TextInput, PwdInput, FooterAuth } from "../component"
 import { getAuth, createUserWithEmailAndPassword } from "firebase/auth"
-import { app } from '../firebase';
+import { app, db } from '../firebase';
+import { addDoc, setDoc, collection, doc } from "firebase/firestore"; 
 
 const Register = ({navigation}) => {
 
@@ -21,6 +22,7 @@ const Register = ({navigation}) => {
   const auth = getAuth(app)
 
   const handleRegister = () => {
+    // email.toLowerCase()
     if ( email=="" || password=="" || password2==""){
       Alert.alert("isi email & password")
       return;
@@ -35,6 +37,12 @@ const Register = ({navigation}) => {
         console.log(user)
         navigation.navigate("Login")
         Alert.alert("Success sign up!")
+      }).then(()=>{
+        const emailLow = email.toLocaleLowerCase()
+        setDoc(doc(db, "Finance", emailLow),{
+          email: email,
+          saldo: 0
+        })
       })
       .catch(error => {
         Alert.alert(error.message)
