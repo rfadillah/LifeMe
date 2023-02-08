@@ -4,7 +4,7 @@
     "slug": "LifeMe",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/icon.png",
+    "icon": "./assets/logo-lifeme-invert1.png",
     "userInterfaceStyle": "light",
     "splash": {
       "image": "./assets/splash-lifeme.png",
@@ -23,7 +23,7 @@
     "android": {
       "softwareKeyboardLayoutMode": "pan",
       "adaptiveIcon": {
-        "foregroundImage": "./assets/adaptive-icon.png",
+        "foregroundImage": "./assets/logo-lifeme-invert1.png",
         "backgroundColor": "#FFFFFF"
       }
     },
