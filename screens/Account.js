@@ -20,9 +20,17 @@ import {
   TextInput,
   PwdInput,
   FooterAuth,
+  TittleComp,
 } from "../component";
 import { getAuth } from "firebase/auth";
 import { app } from "../firebase";
+import {
+  useFonts,
+  Poppins_700Bold,
+  Poppins_400Regular,
+  Poppins_600SemiBold,
+  Poppins_500Medium,
+} from "@expo-google-fonts/poppins";
 
 const Account = ({ navigation }) => {
   const auth = getAuth(app);
@@ -46,12 +54,19 @@ const Account = ({ navigation }) => {
       });
   };
 
-  return (
+  const [fontsLoaded] = useFonts({
+    Poppins_700Bold,
+    Poppins_400Regular,
+    Poppins_600SemiBold,
+    Poppins_500Medium,
+  });
+
+  return fontsLoaded ? (
     <Box flex={1} backgroundColor="#3B939B">
-      <Box flex={4} backgroundColor="#ffffff">
+      <Box flex={3} backgroundColor="#f5f5f5">
         <Box flex={1} backgroundColor="#3B939B" borderBottomRightRadius="90px">
-          <HStack mt={"10%"}>
-            <InfoOutlineIcon ml="30%" color="#FFFFFF" />
+          <HStack mt={"4%"}>
+            <InfoOutlineIcon ml="25%" color="#FFFFFF" />
             <Center>
               <Image
                 source={require("../assets/landing_pic.png")}
@@ -60,10 +75,17 @@ const Account = ({ navigation }) => {
                 w="100px"
                 h="100px"
               />
-              <Text color="#FFFFFF" fontSize="30px" Bold>
+              <Text
+                fontFamily={"Poppins_500Medium"}
+                color="#FFFFFF"
+                fontSize="30px"
+                Bold
+              >
                 {nameSplit[0]}
               </Text>
-              <Text color="#FFFFFF">{email}</Text>
+              <Text fontFamily={"Poppins_400Regular"} color="#FFFFFF">
+                {email}
+              </Text>
               {/* <Text color="#FFFFFF">+62 123456789</Text> */}
             </Center>
           </HStack>
@@ -72,11 +94,61 @@ const Account = ({ navigation }) => {
       <Box flex={7} backgroundColor="#F5F5F5" borderTopLeftRadius="90px">
         <Box
           flex={1}
-          backgroundColor="#FFFFFF"
+          // backgroundColor="#ebebeb"
           mb="1%"
           borderTopLeftRadius={"90px"}
+          px={"45px"}
         >
-          <Center>
+          <Box
+            mt={"30px"}
+            backgroundColor={"white"}
+            w="100%"
+            h={"170px"}
+            borderRadius="20px"
+            shadow={"5"}
+            px="2%"
+            justifyContent={"center"}
+            alignItems="center"
+          >
+            <TittleComp judul={"Information"} />
+            <Separator height={"7px"} />
+            <Text
+              fontFamily={"Poppins_400Regular"}
+              color={"gray.400"}
+              px={"7%"}
+              // textAlign={"center"}
+            >
+              Aplikasi untuk gaya hidup anda! atur keuangan, catat jurnal harian
+              serta dapatkan rekomendasi psikolog untuk anda
+            </Text>
+            {/* <></> */}
+          </Box>
+          {/* <Separator height={"3px"} /> */}
+          <Box
+            mt={"20px"}
+            backgroundColor={"white"}
+            w="100%"
+            h={"130px"}
+            borderRadius="20px"
+            shadow={"5"}
+            px="2%"
+            justifyContent={"center"}
+            alignItems="center"
+          >
+            <TittleComp judul={"Developer"} />
+            <Separator height={"7px"} />
+            <Text
+              fontFamily={"Poppins_400Regular"}
+              color={"gray.400"}
+              px={"6%"}
+              // textAlign={"center"}
+            >
+              {/* Rizki Fadilah, M. Mustang H, Deby Febby F, Ika Putri */}
+              ["Rizki Fadilah", "M. Mustang H.", "Deby Febby F.", "Ika Putri"]
+            </Text>
+          </Box>
+          <Separator height={"30px"} />
+          {/* <Center>
             <Text color="#3B939B" mt={"5%"}>
               Information
             </Text>
@@ -100,8 +172,8 @@ const Account = ({ navigation }) => {
               Deby Febby F.{"\n"}
               Ika Putri{"\n"}
             </Text>
-          </Box>
-          <Pressable
+          </Box> */}
+          {/* <Pressable
             onPress={handleLogOut}
             mt="1%"
             ml="10%"
@@ -113,10 +185,33 @@ const Account = ({ navigation }) => {
             <Center>
               <Text>Logout</Text>
             </Center>
+          </Pressable> */}
+          <Pressable onPress={handleLogOut}>
+            <Box
+              // mt={"20px"}
+              backgroundColor={"white"}
+              w="100%"
+              h={"70px"}
+              borderRadius="20px"
+              shadow={"5"}
+              px="2%"
+              justifyContent={"center"}
+              alignItems="center"
+            >
+              <Text
+                fontFamily={"Poppins_600SemiBold"}
+                color={"red.400"}
+                fontSize={17}
+              >
+                Log out
+              </Text>
+            </Box>
           </Pressable>
         </Box>
       </Box>
     </Box>
+  ) : (
+    <AppLoading />
   );
 };
 

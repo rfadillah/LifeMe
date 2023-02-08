@@ -45,10 +45,8 @@ const TabList = () => {
             iconName = focused ? "wallet" : "wallet-outline";
           } else if (rn == "Other") {
             iconName = focused ? "list" : "list-outline";
-          } else if (rn == "Information") {
-            iconName = focused
-              ? "information-circle"
-              : "information-circle-outline";
+          } else if (rn == "More") {
+            iconName = focused ? "settings" : "settings-outline";
           }
 
           return (
@@ -84,7 +82,7 @@ const TabList = () => {
       />
       {/* <Tab.Screen name={'Other'} component={Other} options={{ headerTitleAlign: 'center'}}/> */}
       <Tab.Screen
-        name={"Information"}
+        name={"More"}
         component={Account}
         options={{ headerTitleAlign: "center" }}
       />

@@ -370,8 +370,7 @@ const Finance = ({ navigation }) => {
             justifyContent={"center"}
             alignItems="center"
           >
-            <HStack w={"100%"} justifyContent={"space-between"} px="8%">
-              {/* <HStack justifyContent={"center"} alignItems={"center"}> */}
+            {/* <HStack w={"100%"} justifyContent={"space-between"} px="8%">
               <Text
                 fontFamily={"Poppins_600SemiBold"}
                 fontSize="18px"
@@ -379,14 +378,8 @@ const Finance = ({ navigation }) => {
               >
                 Laporan Bulanan
               </Text>
-            </HStack>
-            <Separator height={"3%"} />
-            <Box
-              h="1.5px"
-              w="90%"
-              backgroundColor="#000000"
-              opacity={0.1}
-            ></Box>
+            </HStack> */}
+            <TittleComp judul={"Laporan Bulanan"} />
             <Separator height={"6%"} />
             <HStack justifyContent={"space-between"} alignItems={"center"}>
               <Select
