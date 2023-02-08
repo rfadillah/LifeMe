@@ -35,14 +35,12 @@ import { PieChart } from "react-native-chart-kit";
 
 const Finance = ({ navigation }) => {
   const getCostByMonth = async () => {
-    // getIncomeByMonth();
     const x = [];
     const q = query(collection(db, "Pengeluaran"), where("email", "==", email));
     const querySnapshot = await getDocs(q);
     querySnapshot.forEach((doc) => {
       const month = doc.data().tanggal.substring(0, 2);
       const year = doc.data().tanggal.substring(6, 8);
-      console.log();
       x.push({
         jumlah: parseInt(doc.data().jumlah),
         month: month,
@@ -50,13 +48,19 @@ const Finance = ({ navigation }) => {
         key: doc.id,
       });
     });
-    const t = x.filter((items) => items.month == monthf);
-    const y = t.filter((items) => items.year == yearf);
-    // console.log(t);
-    const sum = 0;
-    sum = y.map((tot) => tot.jumlah).reduce((a, b) => a + b);
-    console.log(sum);
-    setCost1(sum);
+    if (x.length != 0) {
+      const y = x.filter(
+        (items) => items.month == monthf && items.year == yearf
+      );
+      // console.log("ini y", y);
+      if (y.length != 0) {
+        var sum = y.map((tot) => tot.jumlah).reduce((a, b) => a + b);
+        setCost1(sum);
+      } else {
+        setCost1(0);
+      }
+      // console.log(cost1);
+    }
   };
 
   const getIncomeByMonth = async () => {
@@ -73,41 +77,48 @@ const Finance = ({ navigation }) => {
         key: doc.id,
       });
     });
-    const t = x.filter((items) => items.month == monthf);
-    const y = t.filter((items) => items.year == yearf);
-    // console.log(t);
-    const sum = y.map((tot) => tot.jumlah).reduce((a, b) => a + b);
-    console.log(sum);
-    setIncome1(sum);
+    if (x.length != 0) {
+      const y = x.filter(
+        (items) => items.month == monthf && items.year == yearf
+      );
+      // console.log("ini y", y);
+      if (y.length != 0) {
+        var sum = y.map((tot) => tot.jumlah).reduce((a, b) => a + b);
+        setIncome1(sum);
+      } else {
+        setIncome1(0);
+      }
+      // console.log(income1);
+    }
   };
 
-  const getCost = async () => {
-    const x = [];
-    const q = query(collection(db, "Pengeluaran"), where("email", "==", email));
-    const querySnapshot = await getDocs(q);
-    querySnapshot.forEach((doc) => {
-      const y = parseInt(doc.data().jumlah);
-      x.push({
-        y,
-      });
-    });
-    const sum = x.map((tot) => tot.y).reduce((a, b) => a + b);
-    setCost(sum);
-  };
+  // const getCost = async () => {
+  //   const x = [];
+  //   const q = query(collection(db, "Pengeluaran"), where("email", "==", email));
+  //   const querySnapshot = await getDocs(q);
+  //   querySnapshot.forEach((doc) => {
+  //     const y = parseInt(doc.data().jumlah);
+  //     x.push({
+  //       y,
+  //     });
+  //   });
+  //   const sum = x.map((tot) => tot.y).reduce((a, b) => a + b);
+  //   setCost(sum);
+  // };
 
-  const getIncome = async () => {
-    const x = [];
-    const q = query(collection(db, "Pemasukan"), where("email", "==", email));
-    const querySnapshot = await getDocs(q);
-    querySnapshot.forEach((doc) => {
-      const y = parseInt(doc.data().jumlah);
-      x.push({
-        y,
-      });
-    });
-    const sum = x.map((tot) => tot.y).reduce((a, b) => a + b);
-    setIncome(sum);
-  };
+  // const getIncome = async () => {
+  //   const x = [];
+  //   const q = query(collection(db, "Pemasukan"), where("email", "==", email));
+  //   const querySnapshot = await getDocs(q);
+  //   querySnapshot.forEach((doc) => {
+  //     const y = parseInt(doc.data().jumlah);
+  //     x.push({
+  //       y,
+  //     });
+  //   });
+  //   const sum = x.map((tot) => tot.y).reduce((a, b) => a + b);
+  //   setIncome(sum);
+  // };
 
   const auth = getAuth(app);
   let email = auth.currentUser.email;
@@ -210,8 +221,8 @@ const Finance = ({ navigation }) => {
                 pb={"3px"}
                 onPress={() => {
                   getData();
-                  getCost();
-                  getIncome();
+                  getCostByMonth();
+                  getIncomeByMonth();
                 }}
                 backgroundColor="white"
                 w={"75px"}
@@ -246,18 +257,6 @@ const Finance = ({ navigation }) => {
             alignItems="center"
           >
             {/* tempat menu */}
-            {/* <Box w={"100%"} justifyContent={"space-between"} px="8%">
-              <Text fontFamily={"Poppins_600SemiBold"} fontSize="18px">
-                Menu
-              </Text>
-            </Box>
-            <Separator height={"3%"} />
-            <Box
-              h="1.5px"
-              w="90%"
-              backgroundColor="#000000"
-              opacity={0.1}
-            ></Box> */}
             <TittleComp judul={"Menu"} />
             <Separator height={"20px"} />
             <HStack justifyContent={"space-between"}>
@@ -361,6 +360,7 @@ const Finance = ({ navigation }) => {
                 mt={1}
                 onValueChange={(itemValue) => setYearf(itemValue)}
               >
+                <Select.Item label="2022" value="22" />
                 <Select.Item label="2023" value="23" />
               </Select>
               <Select
@@ -377,7 +377,6 @@ const Finance = ({ navigation }) => {
                 mt={1}
                 onValueChange={(itemValue) => {
                   setMonthf(itemValue);
-                  // getCostByMonth(monthf);
                 }}
               >
                 <Select.Item label="Januari" value="01" />
