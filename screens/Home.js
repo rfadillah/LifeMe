@@ -36,33 +36,120 @@ import { Linking } from "react-native";
 // import { async } from "@firebase/util";
 
 const Home = ({ navigation }) => {
-  const getCost = async () => {
+  const getCostByMonth = async () => {
     const x = [];
     const q = query(collection(db, "Pengeluaran"), where("email", "==", email));
     const querySnapshot = await getDocs(q);
     querySnapshot.forEach((doc) => {
-      const y = parseInt(doc.data().jumlah);
+      const month = doc.data().tanggal.substring(0, 2);
+      const year = doc.data().tanggal.substring(6, 8);
       x.push({
-        y,
+        tanggal: doc.data().tanggal,
+        kategori: doc.data().kategori,
+        jumlah: parseInt(doc.data().jumlah),
+        month: month,
+        year: year,
+        key: doc.id,
       });
     });
-    const sum = x.map((tot) => tot.y).reduce((a, b) => a + b);
-    setCost(sum);
+    if (x.length != 0) {
+      const y = x.filter(
+        (items) => items.month == monthf && items.year == yearf
+      );
+      // console.log("ini y", y);
+      if (y.length != 0) {
+        var sum = y.map((tot) => tot.jumlah).reduce((a, b) => a + b);
+        setCost1(sum);
+        const p = y.filter((items) => items.kategori == "Primer");
+        const s = y.filter((items) => items.kategori == "Sekunder");
+        const t = y.filter((items) => items.kategori == "Tersier");
+        // console.log(p, s, t, primer, sekunder);
+        if (p.length != 0) {
+          var sum = p.map((tot) => tot.jumlah).reduce((a, b) => a + b);
+          setPrimer(sum);
+        } else {
+          setPrimer(0);
+          // console.log("prim", primer);
+        }
+        if (s.length != 0) {
+          var sum = s.map((tot) => tot.jumlah).reduce((a, b) => a + b);
+          setSekunder(sum);
+        } else {
+          setSekunder(0);
+        }
+        if (t.length != 0) {
+          var sum = t.map((tot) => tot.jumlah).reduce((a, b) => a + b);
+          setTersier(sum);
+        } else {
+          // console.log("Hallo");
+          setTersier(0);
+        }
+      } else {
+        setCost1(0);
+        setPrimer(0);
+        setSekunder(0);
+        setTersier(0);
+      }
+      // console.log(cost1);
+    }
   };
 
-  const getIncome = async () => {
+  const getIncomeByMonth = async () => {
     const x = [];
     const q = query(collection(db, "Pemasukan"), where("email", "==", email));
     const querySnapshot = await getDocs(q);
     querySnapshot.forEach((doc) => {
-      const y = parseInt(doc.data().jumlah);
+      const month = doc.data().tanggal.substring(0, 2);
+      const year = doc.data().tanggal.substring(6, 8);
       x.push({
-        y,
+        jumlah: parseInt(doc.data().jumlah),
+        month: month,
+        year: year,
+        key: doc.id,
       });
     });
-    const sum = x.map((tot) => tot.y).reduce((a, b) => a + b);
-    setIncome(sum);
+    if (x.length != 0) {
+      const y = x.filter(
+        (items) => items.month == monthf && items.year == yearf
+      );
+      // console.log("ini y", y);
+      if (y.length != 0) {
+        var sum = y.map((tot) => tot.jumlah).reduce((a, b) => a + b);
+        setIncome1(sum);
+      } else {
+        setIncome1(0);
+      }
+      // console.log(income1);
+    }
   };
+
+  // const getCost = async () => {
+  //   const x = [];
+  //   const q = query(collection(db, "Pengeluaran"), where("email", "==", email));
+  //   const querySnapshot = await getDocs(q);
+  //   querySnapshot.forEach((doc) => {
+  //     const y = parseInt(doc.data().jumlah);
+  //     x.push({
+  //       y,
+  //     });
+  //   });
+  //   const sum = x.map((tot) => tot.y).reduce((a, b) => a + b);
+  //   setCost(sum);
+  // };
+
+  // const getIncome = async () => {
+  //   const x = [];
+  //   const q = query(collection(db, "Pemasukan"), where("email", "==", email));
+  //   const querySnapshot = await getDocs(q);
+  //   querySnapshot.forEach((doc) => {
+  //     const y = parseInt(doc.data().jumlah);
+  //     x.push({
+  //       y,
+  //     });
+  //   });
+  //   const sum = x.map((tot) => tot.y).reduce((a, b) => a + b);
+  //   setIncome(sum);
+  // };
 
   const getData = async () => {
     const docRef = doc(db, "Finance", email);
@@ -82,8 +169,8 @@ const Home = ({ navigation }) => {
     //   getIncome();
     // }, 500);
     getData();
-    getCost();
-    getIncome();
+    getCostByMonth();
+    getIncomeByMonth();
   }, []);
 
   const [fontsLoaded] = useFonts({
@@ -97,11 +184,14 @@ const Home = ({ navigation }) => {
 
   let email = auth.currentUser.email;
   const nameSplit = email.split("@");
-  const [cost, setCost] = React.useState(0);
-  const [monthf, setMonthf] = React.useState("");
-  const [yearf, setYearf] = React.useState("");
-  const [saldo, setSaldo] = React.useState(0);
-  const [income, setIncome] = React.useState(0);
+  const [monthf, setMonthf] = useState("02");
+  const [yearf, setYearf] = useState("23");
+  const [saldo, setSaldo] = useState(0);
+  const [cost1, setCost1] = useState(0);
+  const [income1, setIncome1] = useState(0);
+  const [primer, setPrimer] = useState(0);
+  const [sekunder, setSekunder] = useState(0);
+  const [tersier, setTersier] = useState(0);
 
   return fontsLoaded ? (
     <Box flex={1}>
@@ -158,8 +248,8 @@ const Home = ({ navigation }) => {
                     onPress={() => {
                       // forceUpdate;
                       getData();
-                      getCost();
-                      getIncome();
+                      getCostByMonth();
+                      getIncomeByMonth();
                     }}
                   >
                     <Ionicons
@@ -184,8 +274,9 @@ const Home = ({ navigation }) => {
               opacity={0.1}
             ></Box>
             <Separator height={"6%"} />
-            <HStack justifyContent={"space-between"}>
+            <HStack justifyContent={"space-between"} alignItems={"center"}>
               <Select
+                defaultValue="23"
                 selectedValue={yearf}
                 minWidth="40%"
                 maxH={"40px"}
@@ -198,10 +289,11 @@ const Home = ({ navigation }) => {
                 mt={1}
                 onValueChange={(itemValue) => setYearf(itemValue)}
               >
-                <Select.Item label="2022" value="2022" />
-                <Select.Item label="2023" value="2023" />
+                <Select.Item label="2022" value="22" />
+                <Select.Item label="2023" value="23" />
               </Select>
               <Select
+                defaultValue="02"
                 selectedValue={monthf}
                 minWidth="40%"
                 maxH={"40px"}
@@ -214,9 +306,36 @@ const Home = ({ navigation }) => {
                 mt={1}
                 onValueChange={(itemValue) => setMonthf(itemValue)}
               >
-                <Select.Item label="Januari" value="Januari" />
-                <Select.Item label="Februari" value="Februari" />
+                <Select.Item label="Januari" value="01" />
+                <Select.Item label="Februari" value="02" />
+                <Select.Item label="Maret" value="03" />
+                <Select.Item label="April" value="04" />
+                <Select.Item label="Mei" value="05" />
+                <Select.Item label="Juni" value="06" />
+                <Select.Item label="Juli" value="07" />
+                <Select.Item label="Agustus" value="08" />
+                <Select.Item label="September" value="09" />
+                <Select.Item label="Oktober" value="10" />
+                <Select.Item label="November" value="11" />
+                <Select.Item label="Desember" value="12" />
               </Select>
+              {/* tempat button */}
+              <Pressable
+                ml={"5px"}
+                mt={"4px"}
+                backgroundColor={"#2F8189"}
+                minW={"35px"}
+                justifyContent={"center"}
+                alignItems={"center"}
+                h={"40px"}
+                borderRadius={"3px"}
+                onPress={() => {
+                  getCostByMonth();
+                  getIncomeByMonth();
+                }}
+              >
+                <Ionicons name="search" size={20} color={"#ffffff"}></Ionicons>
+              </Pressable>
             </HStack>
             <HStack>
               <Box w="42%" h="100px" justifyContent={"center"}>
@@ -230,7 +349,7 @@ const Home = ({ navigation }) => {
                     color="#2F8189"
                   >
                     Rp.
-                    {income
+                    {income1
                       .toString()
                       .replace(/\B(?=(\d{3})+(?!\d))/g, ".")}{" "}
                   </Text>
@@ -246,7 +365,7 @@ const Home = ({ navigation }) => {
                     fontSize="18px"
                     color="red.400"
                   >
-                    Rp. {cost.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".")}{" "}
+                    Rp. {cost1.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".")}{" "}
                   </Text>
                 </Center>
               </Box>
