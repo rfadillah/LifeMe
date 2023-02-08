@@ -11,7 +11,7 @@ import {
   Spinner,
 } from "native-base";
 import { Separator } from "../component";
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import AppLoading from "expo-app-loading";
 import {
   useFonts,
@@ -19,7 +19,7 @@ import {
   Poppins_500Medium,
   Poppins_400Regular,
 } from "@expo-google-fonts/poppins";
-import { Linking } from "react-native";
+import { Linking, RefreshControl } from "react-native";
 
 const RenderItem = ({ item }) => {
   return (
@@ -83,11 +83,11 @@ const RenderItem = ({ item }) => {
 const Psikolog = () => {
   useEffect(() => {
     fetchContent();
-    // console.log(data);
   }, []);
 
   const [data, setData] = useState([]);
   const [isContentLoading, setisContentLoading] = useState(true);
+  const [isRefreshing, setIsRefreshing] = useState(false);
 
   const fetchContent = () => {
     fetch(`https://rfadillah.github.io/psikolog/psikolog.json`)
@@ -106,6 +106,14 @@ const Psikolog = () => {
     Poppins_400Regular,
   });
 
+  const onRefresh = useCallback(() => {
+    setIsRefreshing(true);
+    fetchContent();
+    setTimeout(() => {
+      setIsRefreshing(false);
+    }, 2000);
+  }, []);
+
   return fontsLoaded ? (
     <>
       {isContentLoading ? (
@@ -118,8 +126,11 @@ const Psikolog = () => {
           data={data}
           keyExtractor={(item) => item.id}
           renderItem={({ item }) => <RenderItem item={item} />}
-          // onRefresh={this.onRefresh}
-          // refreshing={isFetching}
+          refreshControl={
+            <RefreshControl refreshing={isRefreshing} onRefresh={onRefresh} />
+          }
+          // onRefresh={onRefresh}
+          // refreshing={isRefreshing}
         />
       )}
     </>
