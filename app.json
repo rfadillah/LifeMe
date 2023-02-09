@@ -5,7 +5,11 @@
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/logo-lifeme-invert1.png",
-    "userInterfaceStyle": "light",
+    "userInterfaceStyle": "dark",
+    "androidStatusBar": {
+      "backgroundColor": "#3b939b",
+      "translucent": false
+    },
     "splash": {
       "image": "./assets/splash-lifeme.png",
       "resizeMode": "contain",
@@ -25,10 +29,16 @@
       "adaptiveIcon": {
         "foregroundImage": "./assets/logo-lifeme-invert1.png",
         "backgroundColor": "#FFFFFF"
-      }
+      },
+      "package": "com.kiky.LifeMe"
     },
     "web": {
       "favicon": "./assets/favicon.png"
+    },
+    "extra": {
+      "eas": {
+        "projectId": "3d756129-8f84-4ada-87a0-9f483a124b1f"
+      }
     }
   }
 }
